@@ -25,18 +25,18 @@
         </div>
         <div class="tab-content">
             <div class="block">
-                <a href="#"><img src="static/css/img/product-1.jpg" alt="">
+                <a href="#"><img src="{{ url_for('static', filename='css/img/product-1.jpg') }}" alt="">
                     <div class="text">
-                        <img src="static/css/img/icon-hover.png" alt="img">
+                        <img src="{{ url_for('static', filename='css/img/icon-hover.png')}}" alt="img">
                         <h4>Отличный стул</h4>
                         <p>Расположитесь комфортно. </p>
                     </div>
                 </a>
             </div>
             <div class="block">
-                <a href="#"><img src="static/css/img/product-2.jpg" alt="">
+                <a href="#"><img src="{{ url_for('static', filename='css/img/product-2.jpg') }}" alt="фото продукта">
                     <div class="text">
-                        <img src="static/css/img/icon-hover.png" alt="">
+                        <img src="{{ url_for('static', filename='css/img/icon-hover.png')}}" alt="фото продукта">
                         <h4>Стул повышенного качества</h4>
                         <p>Не оторваться. </p>
                     </div>

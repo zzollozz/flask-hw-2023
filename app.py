@@ -1,7 +1,8 @@
 import sqlite3
 
-from flask import Flask
+from flask import Flask, request, redirect, url_for
 from flask import render_template
+
 
 
 app = Flask(__name__)
@@ -74,6 +75,35 @@ def jacket():
         'title': 'Куртка'
     }
     return render_template('jacket.html', **context)
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        password = request.form.get('password')
+        user_email = request.form.get('email')
+        # аутентификация пользователя
+        return redirect(url_for('home'))
+
+    context = {
+        'title': 'Страница входа'
+    }
+    return render_template('login.html', **context)
+
+@app.route('/register/', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        user_email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Запись данных о пользователе в базу данных
+        return redirect(url_for('home'))
+
+    context = {
+        'title': 'Страница регистрации'
+    }
+    return render_template('register.html', **context)
 
 
 if __name__ == '__main__':

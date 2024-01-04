@@ -12,21 +12,21 @@
         <div class="details-products">
             <div class="details-slider">
                 <div class="slider-product">
-                    <img src="img/slider1.jpg">
+                    <img src="{{ url_for('static' ,filename='css/img/slider1.jpg')}}" alt="изображение">
                 </div>
                 <div class="slider-control">
                     <div class="block">
-                        <a href="#"><img src="img/controll.jpg" alt="">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll.jpg') }}" alt="Фото контрол">
                             <div class="text"></div>
                         </a>
                     </div>
                     <div class="block">
-                        <a href="#"><img src="img/controll1.jpg" alt="">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll1.jpg') }}" alt="Фото контрол_1">
                             <div class="text"></div>
                         </a>
                     </div>
                     <div class="block">
-                        <a href="#"><img src="img/controll2.jpg" alt="">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll2.jpg') }}" alt="Фото контрол_2">
                             <div class="text"></div>
                         </a>
                     </div>
@@ -83,7 +83,6 @@
                         </div>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
