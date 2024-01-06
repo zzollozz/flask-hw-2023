@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block menu %}
+
+{% endblock menu %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="container col-4  mt-5 mb-5">
+        {% if lastname %}
+            <h3>Поздравляем!</h3>
+            <br>
+            <h4>Пользователь {{ firstname }} {{ lastname }} подтвержден.</h4>
+        {% else %}
+            <h3>Верификация не пройдена.</h3>
+        {% endif %}
+        <br>
+        <button class="btn btn-round form-control">
+            <a href="{{ url_for('home') }}" class="">на главную</a>
+        </button>
+    </div>
+    <div class="clr"></div>
+
+{% endblock content %}

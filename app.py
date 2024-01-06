@@ -10,7 +10,6 @@ app.secret_key = bytes(secrets.token_hex(), "UTF-8")
 
 @app.route('/')
 def home():
-
     context = {
         'title': 'главная'
     }
@@ -77,6 +76,7 @@ def jacket():
     }
     return render_template('jacket.html', **context)
 
+
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -89,13 +89,14 @@ def login():
         # аутентификация пользователя
         # flash('Вы авторизованы!', 'success')
         session['email'] = request.form.get('email')
-        session['user_name'] = request.form.get('email').split('@')[0]
+        session['firstname'] = request.form.get('email').split('@')[0]
         return redirect(url_for('home'))
 
     context = {
         'title': 'Страница входа'
     }
     return render_template('login.html', **context)
+
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -104,18 +105,24 @@ def register():
             flash('Заполните форму!', 'danger')
             return redirect(url_for('register'))
 
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        user_email = request.form.get('email')
-        password = request.form.get('password')
+        # Добавление данных с формы в сессию
+        for name in ['firstname', 'lastname', 'user_email', 'password']:
+            session[name] = request.form.get(name)
 
-        # Запись данных о пользователе в базу данных
-        return redirect(url_for('home'))
+        flash('Вы авторизованы!', 'success')
+        context = {
+            'tetle': 'Верификация',
+            'firstname': session['firstname'],
+            'lastname': session['lastname']
+        }
+        return render_template('verific.html', **context)
 
     context = {
         'title': 'Страница регистрации'
     }
     return render_template('register.html', **context)
+
+
 @app.route('/logout/')
 def logout():
     session.clear()
