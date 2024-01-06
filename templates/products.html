@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <div class="hero-white">
+       {% include 'includes/inc_main_manu.html' %}
+    </div>
+{% endblock menu %}
+
+{% block content %}
+    <div class="details">
+        {% include 'includes/inc_categories_menu.html'%}
+        <div class="details-products">
+            <div class="details-slider">
+                <div class="slider-product">
+                    <img src="{{ url_for('static' ,filename='css/img/slider1.jpg')}}" alt="фото куртки">
+                </div>
+                <div class="slider-control mt-5">
+                    <div class="block">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll.jpg') }}" alt="Фото контрол">
+                            <div class="text"></div>
+                        </a>
+                    </div>
+                    <div class="block">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll1.jpg') }}" alt="Фото контрол_1">
+                            <div class="text"></div>
+                        </a>
+                    </div>
+                    <div class="block">
+                        <a href="#"><img src="{{ url_for('static', filename='css/img/controll2.jpg') }}" alt="Фото контрол_2">
+                            <div class="text"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3 class="big-bold">Лучший выбор</h3>
+                <h3 class="red">горячее предложение</h3>
+                <p class="price"> 17585.9 <span>руб</span></p>
+                <a href="/product/" class="red-button">
+                    заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+                <div class="description-text">
+                    <p>Классическая удобная женская куртка с теплой подкладкой.</p>
+                    <p>Идеально подходит для холодных зимних прогулок или в качестве повседневной куртки.</p>
+                    <p>Регулируемый подол и манжеты.</p>
+                    <p>Модель прямого кроя изготовлена из ткани G-1000 ®Original.</p>
+                </div>
+            </div>
+        </div>
+        <div class="related">
+            <div class="title clearfix">
+                <h2>Похожие продукты</h2>
+                <a class="explore" href="#">показать все <img src="{{ url_for('static',  filename='css/img/arrow.png') }}" alt=""></a>
+            </div>
+            <div class="related-products clearfix">
+                <div class="block">
+                    <a href="#"><img src="{{ url_for('static',  filename='css/img/product-11.jpg') }}" alt="">
+                        <div class="text">
+                            <img src="{{ url_for('static',  filename='css/img/icon-hover.png') }}" alt="">
+                            <h4>Шапка Byron Hat</h4>
+                            <p>трикотажная шапка двойной вязки из шерсти</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="{{ url_for('static',  filename='css/img/product-11a.jpg') }}" alt="">
+                        <div class="text">
+                            <img src="{{ url_for('static',  filename='css/img/icon-hover.png') }}" alt="">
+                            <h4>Брюки женские Karla Trousers W</h4>
+                            <p>Брюки с низкой талией и стандартной посадкой</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="{{ url_for('static',  filename='css/img/product-11b.jpg') }}" alt="">
+                        <div class="text">
+                            <img src="{{ url_for('static',  filename='css/img/icon-hover.png') }}" alt="">
+                            <h4>Ремень Vikna belt</h4>
+                            <p>кожаный ремень шириной 4 см с латунной пряжкой в античном стиле</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

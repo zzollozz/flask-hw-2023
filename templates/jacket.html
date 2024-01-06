@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+     <div class="hero-white">
+        {% include 'includes/inc_main_manu.html' %}
+    </div>
+{% endblock menu %}
+
+{% block content %}
+    <div class="details">
+        {% include 'includes/inc_categories_menu.html' %}
+
+        <div class="tab-content">
+            <div class="block">
+                <h1>{{ title }}</h1>
+                <a href="#"><img src="static/css/img/product-1.jpg" alt="">
+                    <div class="text">
+                        <img src="static/css/img/icon-hover.png" alt="img">
+                        <h4>Отличный стул</h4>
+                        <p>Расположитесь комфортно. </p>
+                    </div>
+                </a>
+            </div>
+            <div class="block">
+                <h1>{{ title }}</h1>
+                <a href="#"><img src="static/css/img/product-2.jpg" alt="">
+                    <div class="text">
+                        <img src="static/css/img/icon-hover.png" alt="">
+                        <h4>Стул повышенного качества</h4>
+                        <p>Не оторваться. </p>
+                    </div>
+                </a>
+            </div>
+            <div class="block">
+                <h1>{{ title }}</h1>
+                <a href="#"><img src="static/css/img/product-2.jpg" alt="">
+                    <div class="text">
+                        <img src="static/css/img/icon-hover.png" alt="">
+                        <h4>Стул повышенного качества</h4>
+                        <p>Не оторваться. </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

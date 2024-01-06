@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <div class="hero-white">
+        {% include 'includes/inc_main_manu.html' %}
+    </div>
+{% endblock menu %}
+
+
+{% block content %}
+
+    <div class="container col-4 border mt-5 mb-5 p-4">
+        <main class="form-signin w-100 m-auto">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/login/" method="post">
+                <h1 class="h3 mb-3 fw-normal">Вход</h1>
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
+                    <label for="floatingInput">Адрес электронной почты</label>
+                </div>
+                <div class="form-floating my-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <label for="floatingPassword">Пароль</label>
+                </div>
+
+                <div class="form-check text-start my-3">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="remember">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Запомнить меня
+                    </label>
+                </div>
+                {#    <input type="submit" class="btn btn-primary" value="Отправить">#}
+                <button class="btn btn-primary w-100 my-1" type="submit">Войти</button>
+            </form>
+
+            <a href="/register/">
+                <button class="btn btn-primary w-100 my-3">Регистрация</button>
+            </a>
+        </main>
+    </div>
+    <div class="clr"></div>
+
+{% endblock content %}
