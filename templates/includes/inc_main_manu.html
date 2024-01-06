@@ -4,9 +4,15 @@
         <li><a href="/" class="active">домой</a></li>
         <li><a href="/products/">продукты</a></li>
         <li><a href="/contact/">контакты</a></li>
+        <li>{% if session.user_name %}<b>{{ session.user_name }}</b> {% endif %}</li>
         <li>
-            <a href="/login/">войти</a>
-            <a href="#">выйти</a>
+            {% if session.user_name %}
+                <a href="/logout/">выйти</a>
+            {% else %}
+                <a href="/login/">войти</a>
+            {% endif %}
+
+
         </li>
     </ul>
 

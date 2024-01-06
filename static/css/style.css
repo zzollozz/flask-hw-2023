@@ -712,7 +712,8 @@ td:first-child {
 }
 
 .location {
-	padding: 0px 97px;
+	justify-content: flex-end;
+	padding: 0px;
 }
 .location-1 {
 	height: 368px;
@@ -890,7 +891,7 @@ td:first-child {
 }
 
 .details-products {
-	padding-left: 98px;
+	padding-left: 5px;
 	padding-right: 98px;
 	margin-top: 98px;
 	height: 651px; 
@@ -1009,7 +1010,8 @@ td:first-child {
 }
 
 .related {
-	padding: 0px 98px;
+	padding: 0px;
+	margin-bottom: 24px;
 }
 .related .title {
 	height: 343px;

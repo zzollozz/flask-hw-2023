@@ -1,15 +1,16 @@
 import sqlite3
+import secrets
+from flask import Flask, request, make_response, render_template, session, redirect, url_for, flash
 
-from flask import Flask, request, redirect, url_for
-from flask import render_template
-
-
+from authorization import is_valid_form_fields
 
 app = Flask(__name__)
+app.secret_key = bytes(secrets.token_hex(), "UTF-8")
 
 
 @app.route('/')
 def home():
+
     context = {
         'title': 'главная'
     }
@@ -19,7 +20,7 @@ def home():
 @app.route('/products/')
 def products():
     context = {
-        'title': 'продукты'
+        'title': 'продукты',
     }
     return render_template('products.html', **context)
 
@@ -79,9 +80,16 @@ def jacket():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        password = request.form.get('password')
+        if is_valid_form_fields(request):
+            flash('Заполните форму!', 'danger')
+            return redirect(url_for('login'))
+
         user_email = request.form.get('email')
+        password = request.form.get('password')
         # аутентификация пользователя
+        # flash('Вы авторизованы!', 'success')
+        session['email'] = request.form.get('email')
+        session['user_name'] = request.form.get('email').split('@')[0]
         return redirect(url_for('home'))
 
     context = {
@@ -92,6 +100,10 @@ def login():
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        if is_valid_form_fields(request):
+            flash('Заполните форму!', 'danger')
+            return redirect(url_for('register'))
+
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
         user_email = request.form.get('email')
@@ -104,6 +116,10 @@ def register():
         'title': 'Страница регистрации'
     }
     return render_template('register.html', **context)
+@app.route('/logout/')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
