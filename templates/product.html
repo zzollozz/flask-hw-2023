@@ -11,13 +11,12 @@
 {% block content %}
 
     <div class="details">
-        <div class="links clearfix">
-            {% include 'includes/inc_categories_menu.html' %}
-        </div>
+
+        {% include 'includes/inc_categories_menu.html' %}
         <div class="details-products">
             <div class="details-slider">
                 <div class="slider-product">
-                    <img src="static/css/img/product-2.jpg">
+                    <img src="{{ url_for('static', filename='css/img/product-2.jpg') }}">
                 </div>
             </div>
             <div class="description">

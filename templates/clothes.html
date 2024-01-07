@@ -12,36 +12,39 @@
 
         <div class="tab-content">
             <div class="block">
-                <h1>{{ title }}</h1>
-                <a href="#"><img src="static/css/img/product-1.jpg" alt="">
+                <h1>Куртки</h1>
+                <a href="#"><img src="{{ url_for('static', filename='css/img/product_kurt.jpg') }}" alt="">
                     <div class="text">
-                        <img src="static/css/img/icon-hover.png" alt="img">
-                        <h4>Отличный стул</h4>
-                        <p>Расположитесь комфортно. </p>
+                        <img src="{{ url_for('static', filename='css/img/icon-hover.png') }}" alt="img">
+                        <h4>Vidda Pro Wool Padded Jacket M</h4>
+                        <p>прочная, теплая мужская куртка надежной конструкции, .</p>
                     </div>
                 </a>
             </div>
+
             <div class="block">
-                <h1>{{ title }}</h1>
-                <a href="#"><img src="static/css/img/product-2.jpg" alt="">
+                <h1>Рубашки</h1>
+                <a href="#"><img src="{{ url_for('static', filename='css/img/product_rub.jpg') }}" alt="">
                     <div class="text">
-                        <img src="static/css/img/icon-hover.png" alt="">
-                        <h4>Стул повышенного качества</h4>
-                        <p>Не оторваться. </p>
+                        <img src="{{ url_for('static', filename='css/img/icon-hover.png') }}" alt="img">
+                        <h4>Granit Shirt M</h4>
+                        <p>теплая мужская рубашка лесоруба</p>
                     </div>
                 </a>
             </div>
+
             <div class="block">
-                <h1>{{ title }}</h1>
-                <a href="#"><img src="static/css/img/product-2.jpg" alt="">
+                <h1>Парки</h1>
+                <a href="#"><img src="{{ url_for('static', filename='css/img/product_par.jpg') }}" alt="">
                     <div class="text">
-                        <img src="static/css/img/icon-hover.png" alt="">
-                        <h4>Стул повышенного качества</h4>
-                        <p>Не оторваться. </p>
+                        <img src="{{ url_for('static', filename='css/img/icon-hover.png') }}" alt="img">
+                        <h4>Парка Expedition Long Down Parka W</h4>
+                        <p>то удлиненная женская версия классической куртки</p>
                     </div>
                 </a>
             </div>
+
         </div>
     </div>
-
+    <div class="clr"></div>
 {% endblock content %}

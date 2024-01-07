@@ -26,19 +26,19 @@ def products():
 
 @app.route('/product/')
 # @app.route('/products/<int:id>/')    # Все продукты - Витрина
-def product(id=1):
+def product():
     product = {
-        'id': id,
-        'name': 'text Product',
-        'category': 'text Category',
-        'price': 3411.00,
-        'shot_desc': 'тест описание',
-        'description': 'тестовое подробное описание'
+        'id': 00,
+        'name': 'Jordan 1 Retro High Game Royal',
+        'category': 'обувь',
+        'price': 43045.00,
+        'shot_desc': 'Бренд: Air Jordan',
+        'description': 'Модель: AIR JORDAN 1 RETRO HIGH OG "GAME ROYAL"'
 
     }
     context = {
         'title': 'карточка продукта',
-        'cart_prod': id,
+        'cart_prod': 00,
         'product': product,
 
     }
@@ -57,6 +57,9 @@ def contact():
 def clothes():
     context = {
         'title': 'Одежда',
+        'name': 'Vidda Pro Wool Padded Jacket M',
+        'category': 'Куртка',
+
     }
     return render_template('clothes.html', **context)
 
