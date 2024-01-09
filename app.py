@@ -1,6 +1,5 @@
-import sqlite3
 import secrets
-from flask import Flask, request, make_response, render_template, session, redirect, url_for, flash
+from flask import Flask, request, render_template, session, redirect, url_for, flash
 
 from authorization import is_valid_form_fields
 
@@ -25,7 +24,6 @@ def products():
 
 
 @app.route('/product/')
-# @app.route('/products/<int:id>/')    # Все продукты - Витрина
 def product():
     product = {
         'id': 00,
@@ -75,7 +73,8 @@ def footwear():
 @app.route('/jacket/')  # Куртка
 def jacket():
     context = {
-        'title': 'Куртка'
+        'title': 'Куртка',
+        'name_page': 'Большой выбор курток'
     }
     return render_template('jacket.html', **context)
 
@@ -90,7 +89,6 @@ def login():
         user_email = request.form.get('email')
         password = request.form.get('password')
         # аутентификация пользователя
-        # flash('Вы авторизованы!', 'success')
         session['email'] = request.form.get('email')
         session['firstname'] = request.form.get('email').split('@')[0]
         return redirect(url_for('home'))
