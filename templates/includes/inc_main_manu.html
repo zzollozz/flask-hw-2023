@@ -4,9 +4,9 @@
         <li><a href="/" class="active">домой</a></li>
         <li><a href="/products/">продукты</a></li>
         <li><a href="/contact/">контакты</a></li>
-        <li>{% if session.firstname %}<b>{{ session.firstname }}</b> {% endif %}</li>
+        <li>{% if session.user_login %}<b>{{ session.user_login }}</b> {% endif %}</li>
         <li>
-            {% if session.firstname %}
+            {% if session.user_login %}
                 <a href="/logout/">выйти</a>
             {% else %}
                 <a href="/login/">войти</a>

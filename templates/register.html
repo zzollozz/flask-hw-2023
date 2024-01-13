@@ -23,24 +23,39 @@
             {% endwith %}
             <form class="form-horizontal" action="{{ url_for('register') }}" method="post"
                   enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="text" class="form-label">Имя</label>
-                    <input class="form-control" type="text" name="firstname" placeholder="Имя">
-                </div>
+                {{ form.csrf_token }}
+                {% for field in form if field.name != 'csrf_token' %}
+                    <div class="mb-3">
+                        {{ field.label }}<br>
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="alert alert-danger">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
 
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Фамилия</label>
-                    <input class="form-control" type="text" name="lastname" placeholder="Фамилия">
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Почта</label>
-                    <input class="form-control" type="email" name="email" placeholder="почта">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Пароль</label>
-                    <input class="form-control" type="text" name="lastname" placeholder="Пароль">
-                </div>
+{#                                <div class="mb-3">#}
+{#                                    <label for="text" class="form-label">Имя</label>#}
+{#                                    <input class="form-control" type="text" name="firstname" placeholder="Имя">#}
+{#                                </div>#}
+{##}
+{#                                <div class="mb-3">#}
+{#                                    <label for="exampleInputEmail1" class="form-label">Фамилия</label>#}
+{#                                    <input class="form-control" type="text" name="lastname" placeholder="Фамилия">#}
+{#                                </div>#}
+{##}
+{#                                <div class="mb-3">#}
+{#                                    <label for="exampleInputEmail1" class="form-label">Почта</label>#}
+{#                                    <input class="form-control" type="email" name="email" placeholder="почта">#}
+{#                                </div>#}
+{#                                <div class="mb-3">#}
+{#                                    <label for="password" class="form-label">Пароль</label>#}
+{#                                    <input class="form-control" type="text" name="lastname" placeholder="Пароль">#}
+{#                                </div>#}
 
                 <input class="form-control btn btn-primary" type="submit" value="зарегистрироваться">
             </form>

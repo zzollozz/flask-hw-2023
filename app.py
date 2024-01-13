@@ -1,10 +1,11 @@
-import secrets
-from flask import Flask, request, render_template, session, redirect, url_for, flash
+import hashlib
+
+from flask import request, render_template, session, redirect, url_for, flash
 
 from authorization import is_valid_form_fields
-
-app = Flask(__name__)
-app.secret_key = bytes(secrets.token_hex(), "UTF-8")
+from conf import app, db
+from models import Users
+from forms import RegistrationForm, LoginForm
 
 
 @app.route('/')
@@ -81,53 +82,64 @@ def jacket():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        if is_valid_form_fields(request):
-            flash('Заполните форму!', 'danger')
-            return redirect(url_for('login'))
-
-        user_email = request.form.get('email')
-        password = request.form.get('password')
+    form = LoginForm()
+    if request.method == 'POST' and form.validate():
+        data_user = Users.query.filter_by(user_login=form.user_login.data).first()
+        password = hashlib.sha256(form.password.data.encode('utf-8')).hexdigest()
         # аутентификация пользователя
-        session['email'] = request.form.get('email')
-        session['firstname'] = request.form.get('email').split('@')[0]
-        return redirect(url_for('home'))
+        if data_user and password == data_user.password:
 
+            # Нужно понять что хранить в открытой ссесии !!!!!!!!!!!!
+            session['user_login'] = data_user.user_login
+            return redirect(url_for('home'))
+        else:
+            flash('Пройдите регистрацию', 'warning')
+            return redirect(url_for('login'))
     context = {
         'title': 'Страница входа'
     }
-    return render_template('login.html', **context)
+    return render_template('login.html', **context, form=form)
 
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        if is_valid_form_fields(request):
-            flash('Заполните форму!', 'danger')
-            return redirect(url_for('register'))
+    form = RegistrationForm()
 
-        # Добавление данных с формы в сессию
-        for name in ['firstname', 'lastname', 'user_email', 'password']:
-            session[name] = request.form.get(name)
-
-        flash('Вы авторизованы!', 'success')
+    if request.method == 'POST' and form.validate():
+        data_user = Users(
+            firstname=form.firstname.data,
+            lastname=form.lastname.data,
+            user_login=form.user_login.data,
+            gender=form.gender.data,
+            email=form.email.data,
+            password=hashlib.sha256(form.password.data.encode('utf-8')).hexdigest()
+        )
+        db.session.add(data_user)
+        db.session.commit()
+        session['user_login'] = data_user.user_login
         context = {
-            'tetle': 'Верификация',
-            'firstname': session['firstname'],
-            'lastname': session['lastname']
+            'title': 'Верификация',
+            'firstname': data_user.firstname,
+            'lastname': data_user.lastname
         }
         return render_template('verific.html', **context)
 
     context = {
-        'title': 'Страница регистрации'
+        'title': 'Страница регистрации',
     }
-    return render_template('register.html', **context)
+    return render_template('register.html', **context, form=form)
 
 
 @app.route('/logout/')
 def logout():
     session.clear()
     return redirect(url_for('home'))
+
+
+@app.cli.command("init-db")
+def init_db():
+    db.create_all()
+    print('OK')
 
 
 if __name__ == '__main__':
